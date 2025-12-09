@@ -1,0 +1,51 @@
+Processing ./submodules/simple-knn
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: simple_knn
+  Building wheel for simple_knn (pyproject.toml): started
+  Building wheel for simple_knn (pyproject.toml): finished with status 'error'
+  error: subprocess-exited-with-error
+  
+  × Building wheel for simple_knn (pyproject.toml) did not run successfully.
+  │ exit code: 1
+  ╰─> [31 lines of output]
+      running bdist_wheel
+      /srv/store/docker-users/thesis/marten1/LOD-3DGS/.venv/lib/python3.12/site-packages/torch/utils/cpp_extension.py:499: UserWarning: Attempted to use ninja as the BuildExtension backend but we could not find ninja.. Falling back to using the slow distutils backend.
+        warnings.warn(msg.format('we could not find ninja.'))
+      running build
+      running build_ext
+      /srv/store/docker-users/thesis/marten1/LOD-3DGS/.venv/lib/python3.12/site-packages/torch/utils/cpp_extension.py:418: UserWarning: The detected CUDA version (12.9) has a minor version mismatch with the version that was used to compile PyTorch (12.1). Most likely this shouldn't be a problem.
+        warnings.warn(CUDA_MISMATCH_WARN.format(cuda_str_version, torch.version.cuda))
+      /srv/store/docker-users/thesis/marten1/LOD-3DGS/.venv/lib/python3.12/site-packages/torch/utils/cpp_extension.py:428: UserWarning: There are no x86_64-linux-gnu-g++ version bounds defined for CUDA version 12.9
+        warnings.warn(f'There are no {compiler_name} version bounds defined for CUDA version {cuda_str_version}')
+      building 'simple_knn._C' extension
+      creating build/temp.linux-x86_64-cpython-312
+      x86_64-linux-gnu-g++ -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -fPIC -I/srv/store/docker-users/thesis/marten1/LOD-3DGS/.venv/lib/python3.12/site-packages/torch/include -I/srv/store/docker-users/thesis/marten1/LOD-3DGS/.venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/srv/store/docker-users/thesis/marten1/LOD-3DGS/.venv/lib/python3.12/site-packages/torch/include/TH -I/srv/store/docker-users/thesis/marten1/LOD-3DGS/.venv/lib/python3.12/site-packages/torch/include/THC -I/usr/local/cuda/include -I/srv/store/docker-users/thesis/marten1/LOD-3DGS/.venv/include -I/usr/include/python3.12 -c ext.cpp -o build/temp.linux-x86_64-cpython-312/ext.o -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=0 -std=c++17
+      /srv/store/docker-users/thesis/marten1/LOD-3DGS/.venv/lib/python3.12/site-packages/torch/utils/cpp_extension.py:1967: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation.
+      If this is not desired, please set os.environ['TORCH_CUDA_ARCH_LIST'].
+        warnings.warn(
+      /usr/local/cuda/bin/nvcc -I/srv/store/docker-users/thesis/marten1/LOD-3DGS/.venv/lib/python3.12/site-packages/torch/include -I/srv/store/docker-users/thesis/marten1/LOD-3DGS/.venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/srv/store/docker-users/thesis/marten1/LOD-3DGS/.venv/lib/python3.12/site-packages/torch/include/TH -I/srv/store/docker-users/thesis/marten1/LOD-3DGS/.venv/lib/python3.12/site-packages/torch/include/THC -I/usr/local/cuda/include -I/srv/store/docker-users/thesis/marten1/LOD-3DGS/.venv/include -I/usr/include/python3.12 -c simple_knn.cu -o build/temp.linux-x86_64-cpython-312/simple_knn.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=0 -gencode=arch=compute_70,code=compute_70 -gencode=arch=compute_70,code=sm_70 -std=c++17
+      nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+      simple_knn.cu:23: warning: "__CUDACC__" redefined
+         23 | #define __CUDACC__
+            |
+      <command-line>: note: this is the location of the previous definition
+      simple_knn.cu(90): error: identifier "FLT_MAX" is undefined
+          me.minn = { FLT_MAX, FLT_MAX, FLT_MAX };
+                      ^
+      
+      simple_knn.cu(154): error: identifier "FLT_MAX" is undefined
+         float best[3] = { FLT_MAX, FLT_MAX, FLT_MAX };
+                           ^
+      
+      2 errors detected in the compilation of "simple_knn.cu".
+      error: command '/usr/local/cuda/bin/nvcc' failed with exit code 2
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+  ERROR: Failed building wheel for simple_knn
+Failed to build simple_knn
+error: failed-wheel-build-for-install
+
+× Failed to build installable wheels for some pyproject.toml based projects
+╰─> simple_knn

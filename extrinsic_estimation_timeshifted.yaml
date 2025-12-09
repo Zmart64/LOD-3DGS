@@ -1,0 +1,65 @@
+experiment:
+  name: lidar_extensive_timeshifted
+  output_root: checkpoints/lidar_extensive
+  log_root: logs/lidar_extensive
+
+data:
+  dataset_root: 2025-09-30_Test-L-UG2_491058901020
+  processed_root: preprocess/output/lidar_extensive_full_timeshifted
+  lidar_file: 2025-09-30_Test-L-UG2_491058901020.bag__subsampled_colored.las
+  pose_file: images360_coordinates_timeShifted.txt
+  base_pose_file: trajectory-ts.txt
+  camera_offset: [0.0077, 0.0007, 0.52373]
+  camera_yaw_offset_deg: 186.5
+  camera_pitch_offset_deg: 0.0
+  camera_roll_offset_deg: 0.0
+  rgb_dir: images360
+  pose_stride: 1
+  lidar_max_points: 2500000
+  generate_cube_faces: true
+  cube_face_resolution: 1024
+  cube_face_fov_deg: 90.0
+  horizontal_views: 6
+  vertical_views: 2
+  vertical_pitch_deg: 45.0
+  use_lidar_colors: true
+  gaussian_scale_nearest_k: 16
+  gaussian_scale_min: 0.003
+  gaussian_scale_max: 0.022
+
+training:
+  batch_size: 1
+  rays_per_batch: 131072
+  learning_rate: 0.0008
+  min_learning_rate: 0.0002
+  lr_schedule: cosine
+  optimizer: adam
+  iterations: 700000
+  eval_interval: 1000
+  checkpoint_interval: 5000
+  prune_every: 2500
+  image_downscale: 1
+  sh_degree: 0
+  background_color: [0.0, 0.0, 0.0]
+  absgrad: true
+  dataloader_workers: 4
+
+regularization:
+  densify_start: 8000
+  densify_interval: 3000
+  densify_stop: 450000
+  densify_reset_interval: 12000
+  densify_pause_after_reset: 1500
+  opacity_reg: 2.0e-4
+  distortion_reg: 2.0e-3
+  normal_smoothness_reg: 2.0e-3
+  lidar_position_reg: 2.0e-3
+  lidar_color_reg: 1.0e-3
+  scale_clamp_max: 0.018
+
+distributed:
+  enable_ddp: true
+  num_nodes: 1
+  gpus_per_node: 8
+  precision: amp
+  gradient_accumulation: 1

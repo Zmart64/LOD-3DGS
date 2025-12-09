@@ -21,18 +21,29 @@ port = 6009
 conn = None
 addr = None
 
-listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+listener = None
+
+def _start_listener(wish_host, wish_port):
+    global listener
+    try:
+        listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        listener.bind((wish_host, wish_port))
+        listener.listen()
+        listener.settimeout(0)
+    except PermissionError:
+        listener = None
 
 def init(wish_host, wish_port):
-    global host, port, listener
+    global host, port
     host = wish_host
     port = wish_port
-    listener.bind((host, port))
-    listener.listen()
-    listener.settimeout(0)
+    _start_listener(host, port)
 
 def try_connect():
     global conn, addr, listener
+    if listener is None:
+        return
     try:
         conn, addr = listener.accept()
         print(f"[ Viewer ] Connected by {addr}")

@@ -1,0 +1,13 @@
+Processing ./submodules/diff-gaussian-rasterization
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: diff_gaussian_rasterization
+  Building wheel for diff_gaussian_rasterization (pyproject.toml): started
+  Building wheel for diff_gaussian_rasterization (pyproject.toml): still running...
+  Building wheel for diff_gaussian_rasterization (pyproject.toml): still running...
+  Building wheel for diff_gaussian_rasterization (pyproject.toml): finished with status 'done'
+  Created wheel for diff_gaussian_rasterization: filename=diff_gaussian_rasterization-0.0.0-cp312-cp312-linux_x86_64.whl size=2822437 sha256=8d3108b82d85bd32954eb16541be24bf4edcd448e1e8f290c27ae7dd8203555a
+  Stored in directory: /srv/store/docker-users/thesis/marten1/.cache/pip/wheels/f1/60/f3/02c94b56d2c75b2160b6c49c14218619885ed64930cdf115af
+Successfully built diff_gaussian_rasterization
+Installing collected packages: diff_gaussian_rasterization
+Successfully installed diff_gaussian_rasterization-0.0.0

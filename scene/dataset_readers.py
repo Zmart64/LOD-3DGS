@@ -12,7 +12,7 @@
 import os
 import sys
 from PIL import Image
-from typing import NamedTuple
+from typing import NamedTuple, Optional
 from scene.colmap_loader import read_extrinsics_text, read_intrinsics_text, qvec2rotmat, \
     read_extrinsics_binary, read_intrinsics_binary, read_points3D_binary, read_points3D_text
 from utils.graphics_utils import getWorld2View2, focal2fov, fov2focal, OctreeGaussian, OctreeGaussianNode
@@ -38,12 +38,12 @@ class CameraInfo(NamedTuple):
     image: np.array
     image_path: str
     image_name: str
-    depth_path: str
-    depth: np.array
     width: int
     height: int
     cx: float
     cy: float
+    depth_path: Optional[str] = None
+    depth: Optional[np.array] = None
 
 class SceneInfo(NamedTuple):
     point_cloud: BasicPointCloud
@@ -261,7 +261,7 @@ def readCamerasFromTransforms(path, transformsfile, white_background, extension=
                 cam_name = os.path.join(path, frame["file_path"] + extension)
 
             # NeRF 'transform_matrix' is a camera-to-world transform
-            c2w = np.array(frame["transform_matrix"])
+            c2w = np.array(frame["transform_matrix"], dtype=np.float32)
             # change from OpenGL/Blender camera axes (Y up, Z back) to COLMAP (Y down, Z forward)
             c2w[:3, 1:3] *= -1
 
@@ -280,7 +280,7 @@ def readCamerasFromTransforms(path, transformsfile, white_background, extension=
 
             norm_data = im_data / 255.0
             arr = norm_data[:,:,:3] * norm_data[:, :, 3:4] + bg * (1 - norm_data[:, :, 3:4])
-            image = Image.fromarray(np.array(arr*255.0, dtype=np.byte), "RGB")
+            image = Image.fromarray(np.array(arr*255.0, dtype=np.uint8), "RGB")
 
             if "cx" in contents and "cy" in contents:
                 cx = contents["cx"]
